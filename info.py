@@ -5,7 +5,8 @@ from pre import get_html as gh
 
 url = "https://loj.ac/problem/"
 
-index = [32, 33, 34, 28, 35]
+index_pre = [32, 33, 34, 28, 35]
+index_end = [-4, -4, -4, -4, -3]
 title = ["### 题目描述\n\n", "\n### 输入格式\n\n",
          "\n### 输出格式\n\n", "\n### 样例\n\n", "\n### 数据范围与提示\n\n"]
 
@@ -13,10 +14,13 @@ title = ["### 题目描述\n\n", "\n### 输入格式\n\n",
 def get_face(pid):
     html = gh(url + str(pid) + "/edit")
     lines = html.split('\n')
+    md = list()
     for i in range(len(lines)):
         if lines[i] == "var editors = {":
-            md = [title[j] + lines[i + j + 1][index[j]: -4].replace('\\u002', '/').replace(
-                '\\r\\n', '\n').replace('\\\\', '\\') for j in range(5)]
+            for j in range(5):
+                tmp = lines[i + j + 1][index_pre[j] : index_end[j]]
+                if tmp != "":
+                    md += [title[j], tmp.replace('\\u002', '/').replace('\\r\\n', '\n').replace('\\\\', '\\')]
             break
     text = '\n'.join(md)
     return text
