@@ -1,11 +1,13 @@
+# -*- coding:utf-8 -*-
+
 # By Llf0703
 # 下载及处理测试数据
 
 import os
 import urllib
 import requests
-from info import limit
 from file import get_dir
+from info import get_limit
 
 
 def get_testdata(pid):
@@ -43,7 +45,7 @@ def process_testdata(pid):
         os.system('mv '+now_dir+pre+'0.in '+now_dir+pre+str(data_num)+'.in')
         os.system('mv '+now_dir+pre+'0.out '+now_dir+pre+str(data_num)+'.out')
 
-    memory_limit, time_limit = limit(pid)  # 时空限制
+    memory_limit, time_limit = get_limit(pid)  # 时空限制
 
     file = open(now_dir+'problem.conf', 'w')  # 写入 problem.conf
     file.write('use_builtin_judger on\n')

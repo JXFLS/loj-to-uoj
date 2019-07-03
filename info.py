@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 # By Terrasse
 # 爬取题面及时空限制
 
@@ -18,15 +20,16 @@ def get_face(pid):
     for i in range(len(lines)):
         if lines[i] == "var editors = {":
             for j in range(5):
-                tmp = lines[i + j + 1][index_pre[j] : index_end[j]]
+                tmp = lines[i + j + 1][index_pre[j]: index_end[j]]
                 if tmp != "":
-                    md += [title[j], tmp.replace('\\u002', '/').replace('\\r\\n', '\n').replace('\\\\', '\\')]
+                    md += [title[j], tmp.replace('\\u002', '/').replace(
+                        '\\r\\n', '\n').replace('\\\\', '\\')]
             break
     text = '\n'.join(md)
     return text
 
 
-def limit(pid):
+def get_limit(pid):
     html = gh(url + str(pid))
     lines = html.split('\n')
     for i in range(len(lines)):
@@ -34,4 +37,11 @@ def limit(pid):
             Space = lines[i+1][lines[i+1].index('：')+1: lines[i+1].index(' M')]
             Time = lines[i+2][lines[i+2].index('：')+1: lines[i+2].index(' m')]
             break
+    Time = str(round(int(Time)/1000))
     return Space, Time
+
+
+def get_name(pid):
+    html = gh(url + str(pid))
+    lines = html.split('\n')
+    return lines[11][11:-23]

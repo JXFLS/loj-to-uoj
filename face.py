@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 # By Llf0703
 # 创建题面 problem.md 文件
 

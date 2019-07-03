@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 # By Llf0703
 # 爬取 HTML 代码
 
