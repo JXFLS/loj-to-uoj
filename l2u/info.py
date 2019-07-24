@@ -3,14 +3,14 @@
 # By Terrasse
 # 爬取题面及时空限制
 
-from pre import get_html as gh
+from .pre import get_html as gh
 
 url = "https://loj.ac/problem/"
 
 index_pre = [32, 33, 34, 28, 35]
 index_end = [-4, -4, -4, -4, -3]
-title = ["### 题目描述\n", "\n### 输入格式\n",
-         "\n### 输出格式\n", "\n### 样例\n", "\n### 数据范围与提示\n"]
+title = ["### 题目描述\n", "\n### 输入格式\n","\n### 输出格式\n", "\n### 样例\n", "\n### 数据范围与提示\n"]
+replace_list = [('\\u002f','/'), ('\\u002F','/'), ('\\u003e','>'), ('\\u003E','>'), ('\\r\\n','\n'), ('\\r','\n'), ('\\n','\n'), ('\\\\','\\')]
 
 
 def get_face(pid):
@@ -22,8 +22,9 @@ def get_face(pid):
             for j in range(5):
                 tmp = lines[i + j + 1][index_pre[j]: index_end[j]]
                 if tmp != "":
-                    md += [title[j], tmp.replace('\\u002', '/').replace(
-                        '\\r\\n', '\n').replace('\\\\', '\\')]
+                    for rpc in replace_list:
+                        tmp = tmp.replace(rpc[0], rpc[1])
+                    md += [title[j], tmp]
             break
     text = '\n'.join(md)
     return text
