@@ -6,8 +6,8 @@
 import os
 import urllib
 import requests
-from file import get_dir
-from info import get_limit
+from .file import get_dir
+from .info import get_limit
 
 
 def get_testdata(pid):

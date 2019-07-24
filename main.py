@@ -3,10 +3,10 @@
 # By Llf0703
 
 import sys
-from face import face
-from upload import push
-from file import make_dir
-from testdata import testdata
+from l2u.face import face
+from l2u.upload import push
+from l2u.file import make_dir
+from l2u.testdata import testdata
 
 if __name__ == '__main__':
     n = len(sys.argv)

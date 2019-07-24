@@ -6,8 +6,8 @@
 from selenium import webdriver as wd
 from time import sleep as slp
 from selenium.webdriver.common.keys import Keys
-from info import get_name
-from file import get_dir
+from .info import get_name
+from .file import get_dir
 from os import path
 
 url = "https://www.jxoj.net"
